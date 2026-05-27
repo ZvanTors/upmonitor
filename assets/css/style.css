@@ -1,6 +1,10 @@
 /* =============================================
-   UpMonitor - Modern UI Styles
+   UpMonitor – Modern UI (v1.2)
+   Designed for beauty & usability
    ============================================= */
+
+/* ---------- Import Modern Font ---------- */
+@import url('https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,400;14..32,500;14..32,600;14..32,700;14..32,800&display=swap');
 
 /* ---------- CSS Variables ---------- */
 :root {
@@ -11,18 +15,28 @@
   --btn-radius: 0.5rem;
 }
 
-/* ---------- پایه و اسکرول ---------- */
+/* ---------- Global Reset & Base ---------- */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
 html {
   scroll-behavior: smooth;
 }
 
 body {
-  font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+  font-family: 'Inter', system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
   min-height: 100vh;
-  transition: background-color var(--transition-speed), color var(--transition-speed);
+  margin: 0;
+  background-color: var(--bs-body-bg);
+  color: var(--bs-body-color);
+  transition: background-color 0.3s ease, color 0.3s ease;
+  -webkit-font-smoothing: antialiased;
 }
 
-/* اسکرول‌بار سفارشی */
+/* ---------- Scrollbar Styling ---------- */
 ::-webkit-scrollbar {
   width: 6px;
 }
@@ -33,14 +47,39 @@ body {
   background: rgba(128, 128, 128, 0.4);
   border-radius: 3px;
 }
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(128, 128, 128, 0.6);
+}
 
-/* ---------- Navbar Glassmorphism ---------- */
+/* ---------- Typography ---------- */
+h1, h2, h3, h4, h5, h6 {
+  font-weight: 700;
+  letter-spacing: -0.3px;
+  line-height: 1.3;
+}
+
+.display-6 {
+  font-weight: 800;
+  letter-spacing: -0.5px;
+}
+
+.text-muted {
+  color: var(--bs-secondary-color) !important;
+}
+
+/* ---------- Navbar (Glassmorphism) ---------- */
 .navbar-glass {
   background: rgba(var(--bs-body-bg-rgb), 0.75) !important;
-  backdrop-filter: blur(10px);
-  -webkit-backdrop-filter: blur(10px);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
   border-bottom: 1px solid rgba(128, 128, 128, 0.15);
   transition: background var(--transition-speed);
+  box-shadow: 0 2px 10px rgba(0,0,0,0.02);
+}
+
+.navbar-brand {
+  font-weight: 700;
+  letter-spacing: -0.5px;
 }
 
 /* ---------- Sidebar ---------- */
@@ -51,61 +90,103 @@ body {
   left: 0;
   z-index: 100;
   width: var(--sidebar-width);
-  border-right: 1px solid rgba(128, 128, 128, 0.15);
+  border-right: 1px solid rgba(128, 128, 128, 0.1);
+  background-color: rgba(var(--bs-body-bg-rgb), 0.95);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
   transition: background-color var(--transition-speed);
   overflow-y: auto;
+  border-radius: 0 16px 16px 0;
+  margin: 12px 0 12px 12px;
+  box-shadow: 0 0 24px rgba(0,0,0,0.04);
 }
 
 .sidebar .nav-link {
-  margin: 0.2rem 0.5rem;
-  border-radius: 0.5rem;
-  padding: 0.6rem 1rem;
-  color: inherit;
+  margin: 0.3rem 0.8rem;
+  border-radius: 0.6rem;
+  padding: 0.65rem 1rem;
+  color: var(--bs-body-color);
   transition: all 0.2s ease;
   position: relative;
-  overflow: hidden;
+  display: flex;
+  align-items: center;
+  font-weight: 500;
 }
 
 .sidebar .nav-link i {
   width: 20px;
-  margin-right: 0.5rem;
+  margin-right: 0.75rem;
+  font-size: 0.95rem;
+  opacity: 0.8;
 }
 
 .sidebar .nav-link:hover {
-  background-color: rgba(var(--bs-primary-rgb), 0.1);
+  background-color: rgba(var(--bs-primary-rgb), 0.08);
 }
 
 .sidebar .nav-link.active {
-  background-color: rgba(var(--bs-primary-rgb), 0.2);
+  background-color: rgba(var(--bs-primary-rgb), 0.15);
   font-weight: 600;
   box-shadow: inset 3px 0 0 var(--bs-primary);
 }
 
-/* Sidebar responsive */
+.sidebar .nav-link.active i {
+  opacity: 1;
+}
+
+/* Sidebar footer */
+.sidebar-footer {
+  border-top: 1px solid rgba(128, 128, 128, 0.15);
+  background-color: inherit;
+  font-size: 0.8rem;
+  margin-top: auto;
+  padding: 1rem;
+}
+
+.sidebar-footer small {
+  display: block;
+  opacity: 0.75;
+  transition: opacity 0.2s;
+}
+
+.sidebar-footer small:hover {
+  opacity: 1;
+}
+
+/* ---------- Main Content Area ---------- */
+main {
+  transition: margin-left var(--transition-speed);
+}
+
+/* Responsive sidebar */
 @media (max-width: 767.98px) {
   .sidebar {
     position: static;
     width: 100%;
     height: auto;
     border-right: none;
-    border-bottom: 1px solid rgba(128, 128, 128, 0.15);
+    border-bottom: 1px solid rgba(128, 128, 128, 0.1);
+    margin: 0;
+    border-radius: 0;
+    backdrop-filter: none;
   }
 }
 
-/* ---------- کارت‌ها (Card) ---------- */
+/* ---------- Cards ---------- */
 .card {
-  border: 1px solid rgba(128, 128, 128, 0.1);
+  border: 1px solid rgba(128, 128, 128, 0.08);
   border-radius: var(--card-radius);
   transition: transform 0.2s ease, box-shadow 0.2s ease;
   overflow: hidden;
+  background-color: var(--bs-card-bg);
 }
 
 .card:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 8px 25px rgba(0,0,0,0.1);
+  transform: translateY(-3px);
+  box-shadow: 0 12px 30px rgba(0,0,0,0.08);
 }
 
-/* کارت‌های آماری (داشبورد) */
+/* Stat Cards (Dashboard) */
 .stat-card {
   border: none;
   border-radius: var(--card-radius);
@@ -113,6 +194,9 @@ body {
   background: linear-gradient(135deg, var(--stat-color-1), var(--stat-color-2));
   overflow: hidden;
   position: relative;
+  backdrop-filter: blur(4px);
+  -webkit-backdrop-filter: blur(4px);
+  box-shadow: 0 10px 25px rgba(0,0,0,0.15);
 }
 
 .stat-card::after {
@@ -120,66 +204,200 @@ body {
   position: absolute;
   top: -20px;
   right: -20px;
-  width: 100px;
-  height: 100px;
-  background: rgba(255,255,255,0.15);
+  width: 110px;
+  height: 110px;
+  background: rgba(255,255,255,0.12);
   border-radius: 50%;
 }
 
 .stat-card .card-body {
   position: relative;
   z-index: 1;
+  padding: 1.5rem;
 }
 
 .stat-card i {
   font-size: 2.5rem;
-  opacity: 0.8;
+  opacity: 0.85;
+  margin-bottom: 0.5rem;
 }
 
-/* ---------- دکمه‌ها ---------- */
+/* ---------- Tables ---------- */
+.table-hover tbody tr {
+  transition: all 0.2s ease;
+}
+
+.table-hover tbody tr:hover {
+  background-color: rgba(var(--bs-primary-rgb), 0.03);
+  transform: scale(1.005);
+  box-shadow: 0 2px 10px rgba(0,0,0,0.03);
+}
+
+.table th {
+  font-weight: 600;
+  text-transform: uppercase;
+  font-size: 0.7rem;
+  letter-spacing: 0.8px;
+  color: var(--bs-secondary-color);
+  border-bottom-width: 2px;
+  vertical-align: middle;
+}
+
+.table td {
+  vertical-align: middle;
+}
+
+/* ---------- Buttons ---------- */
 .btn {
   border-radius: var(--btn-radius);
   transition: all 0.2s ease;
+  font-weight: 500;
+  letter-spacing: 0.01em;
 }
 
 .btn:active {
   transform: scale(0.96);
 }
 
-/* ---------- فرم‌ها ---------- */
-.form-control, .form-select {
-  border-radius: var(--btn-radius);
-  transition: border-color 0.2s, box-shadow 0.2s;
+.btn-primary {
+  box-shadow: 0 4px 10px rgba(var(--bs-primary-rgb), 0.3);
 }
 
-.form-control:focus, .form-select:focus {
+.btn-primary:hover {
+  box-shadow: 0 6px 15px rgba(var(--bs-primary-rgb), 0.4);
+}
+
+.btn-sm i {
+  transition: transform 0.15s;
+}
+
+.btn-sm:hover i {
+  transform: translateY(-1px);
+}
+
+/* ---------- Forms ---------- */
+.form-control,
+.form-select {
+  border-radius: var(--btn-radius);
+  transition: border-color 0.2s, box-shadow 0.2s;
+  font-size: 0.95rem;
+}
+
+.form-control:focus,
+.form-select:focus {
+  border-color: var(--bs-primary);
   box-shadow: 0 0 0 0.2rem rgba(var(--bs-primary-rgb), 0.15);
 }
 
-/* ---------- Badge متحرک برای Down ---------- */
-.badge.bg-danger {
-  animation: pulse 2s infinite;
+/* ---------- Status Circles (Monitors table) ---------- */
+.status-circle {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 34px;
+  height: 34px;
+  border-radius: 50%;
+  font-size: 14px;
+  box-shadow: 0 3px 8px rgba(0,0,0,0.2);
+  transition: transform 0.3s ease;
 }
 
-@keyframes pulse {
-  0% { opacity: 1; }
-  50% { opacity: 0.6; }
-  100% { opacity: 1; }
+.status-circle.bg-success {
+  background: linear-gradient(135deg, #28a745, #20c997) !important;
 }
 
-/* ---------- Progress bar ---------- */
+.status-circle.bg-danger {
+  background: linear-gradient(135deg, #dc3545, #fd7e14) !important;
+}
+
+.status-circle.bg-warning {
+  background: linear-gradient(135deg, #ffc107, #fd7e14) !important;
+}
+
+/* Animations */
+.float-up i {
+  animation: float-up 2s ease-in-out infinite;
+}
+
+.pulse-down i {
+  animation: pulse-down 1.5s ease-in-out infinite;
+}
+
+.spin-slow i {
+  animation: spin-slow 3s linear infinite;
+}
+
+@keyframes float-up {
+  0% { transform: translateY(0); }
+  50% { transform: translateY(-3px); }
+  100% { transform: translateY(0); }
+}
+
+@keyframes pulse-down {
+  0% { transform: scale(1); }
+  50% { transform: scale(1.15); }
+  100% { transform: scale(1); }
+}
+
+@keyframes spin-slow {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+/* ---------- Progress Bar ---------- */
 .progress {
   border-radius: 1rem;
-  background: rgba(128, 128, 128, 0.15);
+  background: rgba(128, 128, 128, 0.1);
   overflow: hidden;
 }
 
 .progress-bar {
   transition: width 0.5s ease;
   border-radius: 1rem;
+  font-weight: 600;
+  font-size: 0.75rem;
 }
 
-/* ---------- انیمیشن‌های ورود (fadeInUp) ---------- */
+/* ---------- Alerts ---------- */
+.alert {
+  border-radius: 0.75rem;
+  border: none;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+}
+
+/* ---------- Badge Enhance ---------- */
+.badge {
+  font-weight: 500;
+  letter-spacing: 0.2px;
+}
+
+/* ---------- Donate Page Crypto Cards ---------- */
+.crypto-card {
+  background: rgba(var(--bs-emphasis-color-rgb), 0.02);
+  border: 1px solid rgba(128, 128, 128, 0.08);
+  border-radius: 0.75rem;
+  transition: border-color 0.2s, box-shadow 0.2s;
+}
+
+.crypto-card:hover {
+  border-color: var(--bs-primary);
+  box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+}
+
+/* ---------- Landing Page Hero ---------- */
+.min-vh-75 {
+  min-height: 75vh;
+}
+
+/* ---------- Custom Horizontal Rule ---------- */
+hr {
+  border: 0;
+  height: 1px;
+  background: linear-gradient(to right, transparent, var(--bs-border-color), transparent);
+  margin: 2rem 0;
+}
+
+/* ---------- Fade-in Animation for Page Elements ---------- */
 .fade-in-up {
   opacity: 0;
   transform: translateY(20px);
@@ -193,89 +411,36 @@ body {
   }
 }
 
-/* می‌توانی برای المان‌های مختلف تأخیر اضافه کنی */
-.delay-1 { animation-delay: 0.1s; }
-.delay-2 { animation-delay: 0.2s; }
-.delay-3 { animation-delay: 0.3s; }
-.delay-4 { animation-delay: 0.4s; }
-
-/* ---------- جدول‌ها ---------- */
-.table-hover tbody tr {
-  transition: background-color 0.15s ease;
-}
-
-.table th {
-  font-weight: 600;
-  text-transform: uppercase;
-  font-size: 0.75rem;
-  letter-spacing: 0.5px;
-  color: var(--bs-secondary-color);
-  border-bottom-width: 2px;
-}
-
-/* ---------- تایپوگرافی ---------- */
-h1, h2, h3, h4 {
-  font-weight: 700;
-  letter-spacing: -0.3px;
-}
-
-.display-6 {
-  font-weight: 800;
-  letter-spacing: -0.5px;
-}
-
-/* ---------- Donate page خاص ---------- */
-.crypto-card {
-  background: rgba(var(--bs-emphasis-color-rgb), 0.03);
-  border: 1px solid rgba(128, 128, 128, 0.1);
-  transition: border-color 0.2s;
-}
-
-.crypto-card:hover {
-  border-color: var(--bs-primary);
-}
-
-/* ---------- فوتر ساده (اگر اضافه کنی) ---------- */
-footer {
-  text-align: center;
-  padding: 1.5rem;
-  font-size: 0.85rem;
-  opacity: 0.7;
-}
-
-/* =============================================
-   رفع مشکل خوانایی در حالت Dark Mode
-   ============================================= */
-
-/* تبدیل bg-light به پس‌زمینه‌ی تیره در حالت Dark */
+/* Dark mode overrides for better contrast */
 [data-bs-theme="dark"] .bg-light {
-    background-color: var(--bs-dark-bg-subtle) !important;
-    color: var(--bs-body-color) !important;
+  background-color: var(--bs-dark-bg-subtle) !important;
+  color: var(--bs-body-color) !important;
 }
 
-/* تبدیل هدر جدول‌های با کلاس table-light به تیره */
 [data-bs-theme="dark"] .table-light {
-    --bs-table-bg: var(--bs-dark-bg-subtle);
-    --bs-table-color: var(--bs-body-color);
-    --bs-table-border-color: var(--bs-border-color);
+  --bs-table-bg: var(--bs-dark-bg-subtle);
+  --bs-table-color: var(--bs-body-color);
+  --bs-table-border-color: var(--bs-border-color);
 }
 
-/* اطمینان از خوانایی text-muted در Dark Mode */
 [data-bs-theme="dark"] .text-muted {
-    color: var(--bs-secondary-color) !important;
+  color: var(--bs-secondary-color) !important;
 }
 
-/* امضای سایدبار */
-.sidebar-footer {
-    border-top: 1px solid rgba(128, 128, 128, 0.2);
-    background-color: inherit;
-    font-size: 0.8rem;
+[data-bs-theme="dark"] .navbar-glass {
+  background: rgba(var(--bs-body-bg-rgb), 0.8) !important;
 }
-.sidebar-footer small {
-    display: block;
-    opacity: 0.8;
-    transition: opacity 0.2s;
+
+[data-bs-theme="dark"] .sidebar {
+  background: rgba(var(--bs-body-bg-rgb), 0.9);
+  border-color: rgba(128,128,128,0.2);
 }
-.sidebar-footer small:hover {
-    opacity: 1;
+
+[data-bs-theme="dark"] .stat-card {
+  box-shadow: 0 8px 25px rgba(0,0,0,0.3);
+}
+
+/* ---------- Utility Classes ---------- */
+.text-shadow {
+  text-shadow: 0 1px 4px rgba(0,0,0,0.1);
 }

@@ -54,6 +54,7 @@ foreach ($monitors as $monitor) {
     $type   = $monitor['type'];
     $target = $monitor['target'];
     $port   = $monitor['port'];
+    $keyword = $monitor['keyword'] ?? '';
 
     switch ($type) {
         case 'http':
@@ -61,17 +62,33 @@ foreach ($monitors as $monitor) {
             $url = rtrim($url, '/');
             $result = checkHttp($url);
             break;
+
         case 'https':
             $url = 'https://' . ltrim($target, 'https://');
             $url = rtrim($url, '/');
             $result = checkHttp($url);
             break;
+
         case 'ping':
             $result = checkPing($target);
             break;
+
         case 'port':
             $result = checkPort($target, $port);
             break;
+
+        case 'keyword':
+            $url = 'http://' . ltrim($target, 'http://');
+            $url = rtrim($url, '/');
+            $result = checkKeyword($url, $keyword);
+            break;
+
+        case 'ssl':
+            $host = preg_replace('#^https?://#', '', $target);
+            $host = rtrim($host, '/');
+            $result = checkSSL($host);
+            break;
+
         default:
             continue 2;
     }
@@ -82,6 +99,12 @@ foreach ($monitors as $monitor) {
     // ثبت لاگ
     $logStmt = $pdo->prepare("INSERT INTO monitor_logs (monitor_id, status, response_time) VALUES (?, ?, ?)");
     $logStmt->execute([$monitor['id'], $status, $responseTime]);
+
+    // ذخیره زمان آخرین Down
+    if ($status === 'down') {
+        $pdo->prepare("UPDATE monitors SET last_down_at = NOW() WHERE id = ?")
+            ->execute([$monitor['id']]);
+    }
 
     // به‌روزرسانی مانیتور
     $updateStmt = $pdo->prepare("UPDATE monitors SET status = ?, last_checked = NOW() WHERE id = ?");
