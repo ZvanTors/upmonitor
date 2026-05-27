@@ -184,6 +184,7 @@ CREATE DATABASE IF NOT EXISTS uptime_monitor;
 USE uptime_monitor;
 
 -- Users table
+
 CREATE TABLE IF NOT EXISTS users (
     id INT AUTO_INCREMENT PRIMARY KEY,
     username VARCHAR(50) UNIQUE NOT NULL,
@@ -194,6 +195,7 @@ CREATE TABLE IF NOT EXISTS users (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- Monitors table
+
 CREATE TABLE IF NOT EXISTS monitors (
     id INT AUTO_INCREMENT PRIMARY KEY,
     user_id INT NOT NULL,
@@ -210,6 +212,7 @@ CREATE TABLE IF NOT EXISTS monitors (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- Monitor logs table
+
 CREATE TABLE IF NOT EXISTS monitor_logs (
     id INT AUTO_INCREMENT PRIMARY KEY,
     monitor_id INT NOT NULL,
@@ -220,6 +223,7 @@ CREATE TABLE IF NOT EXISTS monitor_logs (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- Maintenance windows table
+
 CREATE TABLE IF NOT EXISTS monitor_maintenance (
     id INT AUTO_INCREMENT PRIMARY KEY,
     monitor_id INT NOT NULL,
