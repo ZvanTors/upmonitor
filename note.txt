@@ -1,0 +1,8 @@
+http://localhost/uptime-monitor/cron.php?force=1
+
+
+
+
+
+/usr/local/bin/php /home/username/public_html/uptime-monitor/cron.php
+For Every Minutes * * * * *

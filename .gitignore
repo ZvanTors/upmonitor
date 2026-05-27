@@ -1,0 +1,19 @@
+# Database config (contain passwords)
+includes/config.php
+
+# XAMPP / IDE files
+*.log
+*.tmp
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/
+
+# OS files
+desktop.ini
+
+# Cron secret file (if separate)
+cron-secret.txt
+
+# Uploaded user content (if any)
+assets/uploads/
