@@ -52,7 +52,7 @@
 
 Download the latest release ZIP from the Releases page, or clone:
 
-git clone https://github.com/rmoradi2019/upmonitor.git
+git clone https://github.com/ZvanTors/upmonitor.git
 
 ### Step 2: Database Setup
 
@@ -157,7 +157,7 @@ MIT License. See LICENSE for more information.
 
 **rmoradi2019**
 
-- GitHub: https://github.com/rmoradi2019
+- GitHub: https://github.com/ZvanTors
 
 ---
 
